@@ -59,7 +59,7 @@ while read -ra data; do
 	username="${data[@]:1}"
 	printf 'clean\nquit\ny\n' | \
 		${GPG} --command-fd 0 --edit-key ${keyid}
-	if ! ${GPG} --list-keys --with-colons ${keyid} 2>/dev/null | grep -q '^pub:f:'; then
+	if ! ${GPG} --list-keys --with-colons ${keyid} 2>/dev/null | grep -q '^pub:m:'; then
 		echo "key is not fully trusted: ${keyid} ${username}"
 	else
 		${GPG} --armor --no-emit-version --export ${keyid} >> packager/${username}.asc
